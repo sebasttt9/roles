@@ -45,9 +45,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/docs",
+          "raw": "{{baseUrl}}/api",
           "host": ["{{baseUrl}}"],
-          "path": ["api", "docs"]
+          "path": ["api"]
         }
       }
     },
@@ -84,9 +84,9 @@
           "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"admin123\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/auth/register",
+          "raw": "{{baseUrl}}/auth/register",
           "host": ["{{baseUrl}}"],
-          "path": ["api", "auth", "register"]
+          "path": ["auth", "register"]
         }
       }
     },
@@ -127,9 +127,9 @@
           "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"admin123\"\n}"
         },
         "url": {
-          "raw": "{{baseUrl}}/api/auth/login",
+          "raw": "{{baseUrl}}/auth/login",
           "host": ["{{baseUrl}}"],
-          "path": ["api", "auth", "login"]
+          "path": ["auth", "login"]
         }
       }
     },
@@ -162,9 +162,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/user/me",
+          "raw": "{{baseUrl}}/user/me",
           "host": ["{{baseUrl}}"],
-          "path": ["api", "user", "me"]
+          "path": ["user", "me"]
         }
       }
     },
@@ -202,9 +202,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/api/user/admin",
+          "raw": "{{baseUrl}}/user/admin",
           "host": ["{{baseUrl}}"],
-          "path": ["api", "user", "admin"]
+          "path": ["user", "admin"]
         }
       }
     }
