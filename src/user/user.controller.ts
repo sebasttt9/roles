@@ -8,6 +8,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('Usuarios')
 @Controller('user')
 export class UserController {
+    @Get('test')
+    getTest() {
+        return { message: 'User controller is working!', timestamp: new Date().toISOString() };
+    }
+
     @UseGuards(JwtAuthGuard)
     @Get('me')
     getMe(@Request() req) {

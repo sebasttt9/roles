@@ -207,6 +207,54 @@
           "path": ["user", "admin"]
         }
       }
+    },
+    {
+      "name": "🔧 Health Check Extended", 
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "🧪 Test Endpoint",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/test",
+          "host": ["{{baseUrl}}"],
+          "path": ["test"]
+        }
+      }
+    },
+    {
+      "name": "🧪 Auth Test",
+      "request": {
+        "method": "GET", 
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/auth/test",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "test"]
+        }
+      }
+    },
+    {
+      "name": "🧪 User Test",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/test",
+          "host": ["{{baseUrl}}"],
+          "path": ["user", "test"]
+        }
+      }
     }
   ]
 }
