@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Request, Response } from 'express';
 
 @Controller()
 export class AppController {
@@ -96,6 +97,59 @@ export class AppController {
         'GET /user/admin (requires auth)'
       ],
       note: 'If other routes give 404, there may be a module loading issue'
+    };
+  }
+
+  @Get('full-debug')
+  fullDebug(@Req() req: Request, @Res() res: Response) {
+    console.log('=== FULL DEBUG ENDPOINT CALLED ===');
+    console.log('Request URL:', req.url);
+    console.log('Request method:', req.method);
+    console.log('Request headers:', req.headers);
+    console.log('Request params:', req.params);
+    console.log('Request query:', req.query);
+    
+    const debugInfo = {
+      message: 'Full debug endpoint working',
+      timestamp: new Date().toISOString(),
+      request: {
+        url: req.url,
+        method: req.method,
+        headers: req.headers,
+        params: req.params,
+        query: req.query,
+        baseUrl: req.baseUrl,
+        originalUrl: req.originalUrl,
+        protocol: req.protocol,
+        hostname: req.hostname,
+        ip: req.ip,
+        path: req.path
+      },
+      env: {
+        NODE_ENV: process.env.NODE_ENV,
+        PORT: process.env.PORT,
+        DATABASE_URL: process.env.DATABASE_URL ? 'SET' : 'NOT SET',
+        JWT_SECRET: process.env.JWT_SECRET ? 'SET' : 'NOT SET'
+      }
+    };
+    
+    console.log('Debug info:', JSON.stringify(debugInfo, null, 2));
+    
+    return res.json(debugInfo);
+  }
+
+  @Post('test-post')
+  testPost(@Body() body: any, @Req() req: Request) {
+    console.log('=== TEST POST ENDPOINT CALLED ===');
+    console.log('Request body:', body);
+    console.log('Request URL:', req.url);
+    
+    return {
+      message: 'POST endpoint working',
+      timestamp: new Date().toISOString(),
+      receivedBody: body,
+      method: req.method,
+      url: req.url
     };
   }
 }
