@@ -9,7 +9,9 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   console.log('🚀 Starting application...');
   
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+  });
 
   app.enableCors({
     origin: true,
@@ -43,13 +45,40 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   
   await app.listen(port, '0.0.0.0');
-  console.log(`🚀 Application running on port ${port}`);
+  console.log(`🚀 Application is running on port ${port}`);
   console.log(`📖 Swagger available at: http://0.0.0.0:${port}/api`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   
-  // Keep the process alive
+  // Log available routes
+  console.log('📍 Available routes:');
+  console.log('  GET  /');
+  console.log('  GET  /health');
+  console.log('  GET  /test');
+  console.log('  GET  /auth/test');
+  console.log('  POST /auth/register');
+  console.log('  POST /auth/login');
+  console.log('  GET  /user/test');
+  console.log('  GET  /user/me');
+  console.log('  GET  /user/admin');
+  
+  // Keep the process alive and handle signals properly
   process.on('SIGTERM', () => {
-    console.log('SIGTERM received, but keeping app alive');
+    console.log('📡 SIGTERM received, shutting down gracefully...');
+    app.close().then(() => {
+      console.log('✅ Application closed');
+      process.exit(0);
+    });
   });
+  
+  process.on('SIGINT', () => {
+    console.log('📡 SIGINT received, shutting down gracefully...');
+    app.close().then(() => {
+      console.log('✅ Application closed');
+      process.exit(0);
+    });
+  });
+  
+  console.log('🎯 Application bootstrap completed successfully');
 }
 
 bootstrap().catch(error => {
