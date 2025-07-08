@@ -17,6 +17,11 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
+  // Set global prefix for API routes
+  app.setGlobalPrefix('api', {
+    exclude: ['/'], // Exclude root path to keep "Hello World!"
+  });
+
   const config = new DocumentBuilder()
     .setTitle('Roles y Permisos API')
     .setDescription('Autenticación y autorización con NestJS, JWT y Roles')
@@ -25,7 +30,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api/docs', app, document);
 
   const port = process.env.PORT || 3000;
   await app.listen(port, '0.0.0.0');
