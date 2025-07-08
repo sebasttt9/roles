@@ -72,4 +72,30 @@ export class AppController {
       database: process.env.DATABASE_URL ? 'connected' : 'not-configured'
     };
   }
+
+  @Get('routes')
+  getRoutes() {
+    console.log('🗺️ Routes endpoint called!');
+    return {
+      message: 'Available routes in this controller',
+      routes: [
+        'GET /',
+        'GET /health', 
+        'GET /test',
+        'GET /simple-auth',
+        'GET /simple-user', 
+        'GET /debug',
+        'GET /routes'
+      ],
+      otherControllers: [
+        'GET /auth/test',
+        'POST /auth/register',
+        'POST /auth/login',
+        'GET /user/test',
+        'GET /user/me (requires auth)',
+        'GET /user/admin (requires auth)'
+      ],
+      note: 'If other routes give 404, there may be a module loading issue'
+    };
+  }
 }
