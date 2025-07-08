@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
+import { BooksModule } from './books/books.module';
 
 console.log('🔧 Loading AppModule...');
 
@@ -16,6 +17,7 @@ console.log('🔧 Loading AppModule...');
     AuthModule,
     PrismaModule,
     UserModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

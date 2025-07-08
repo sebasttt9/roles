@@ -54,12 +54,24 @@ async function bootstrap() {
   console.log('  GET  /');
   console.log('  GET  /health');
   console.log('  GET  /test');
+  console.log('  GET  /version');
   console.log('  GET  /auth/test');
   console.log('  POST /auth/register');
   console.log('  POST /auth/login');
   console.log('  GET  /user/test');
   console.log('  GET  /user/me');
   console.log('  GET  /user/admin');
+  console.log('  📚 BOOKS MODULE:');
+  console.log('  GET    /books');
+  console.log('  GET    /books/test');
+  console.log('  GET    /books/stats');
+  console.log('  GET    /books/search?q=query');
+  console.log('  GET    /books/genre/:genre');
+  console.log('  GET    /books/author/:author');
+  console.log('  GET    /books/:id');
+  console.log('  POST   /books');
+  console.log('  PUT    /books/:id');
+  console.log('  DELETE /books/:id');
   
   // Keep the process alive and handle signals properly
   process.on('SIGTERM', () => {
