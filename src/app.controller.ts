@@ -7,9 +7,58 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    console.log('🏠 Health Check endpoint called!');
-    return this.appService.getHello();
+  getHello(@Req() req: Request): any {
+    console.log('🏠 Root endpoint called!');
+    
+    // If there's a query parameter, return different info
+    if (req.query && req.query.test === 'routes') {
+      return {
+        message: 'Route testing endpoint',
+        availableRoutes: [
+          'GET /',
+          'GET /?test=routes',
+          'GET /?test=health',
+          'GET /?test=auth',
+          'GET /?test=user',
+          'GET /health',
+          'GET /test',
+          'GET /version',
+          'GET /auth/test',
+          'GET /user/test'
+        ],
+        timestamp: new Date().toISOString()
+      };
+    }
+    
+    if (req.query && req.query.test === 'health') {
+      return {
+        status: 'OK',
+        message: 'Health check via root endpoint',
+        timestamp: new Date().toISOString()
+      };
+    }
+    
+    if (req.query && req.query.test === 'auth') {
+      return {
+        message: 'Auth test via root endpoint',
+        timestamp: new Date().toISOString(),
+        note: 'This simulates auth controller'
+      };
+    }
+    
+    if (req.query && req.query.test === 'user') {
+      return {
+        message: 'User test via root endpoint',
+        timestamp: new Date().toISOString(),
+        note: 'This simulates user controller'
+      };
+    }
+    
+    return {
+      message: this.appService.getHello(),
+      timestamp: new Date().toISOString(),
+      hint: 'Try /?test=routes to see available tests'
+    };
   }
 
   @Get('health')
