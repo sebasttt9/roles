@@ -7,11 +7,13 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    console.log('🏠 Health Check endpoint called!');
     return this.appService.getHello();
   }
 
   @Get('health')
   getHealth() {
+    console.log('💚 Health endpoint called!');
     return {
       status: 'OK',
       timestamp: new Date().toISOString(),
@@ -29,6 +31,7 @@ export class AppController {
 
   @Get('test')
   getTest() {
+    console.log('🧪 Test endpoint called!');
     return { message: 'Test endpoint working!' };
   }
 }

@@ -104,6 +104,7 @@ With Mau, you can deploy your application in just a few clicks, allowing you to 
    - Importa tu repositorio
 
 3. **Variables de entorno en Railway:**
+
    ```
    DATABASE_URL=your_postgresql_connection_string
    JWT_SECRET=your_jwt_secret
@@ -118,6 +119,7 @@ With Mau, you can deploy your application in just a few clicks, allowing you to 
    - Iniciar la aplicación (`npm run start:prod`)
 
 ### URLs después del deploy:
+
 - **API:** `https://your-app.railway.app`
 - **Swagger:** `https://your-app.railway.app/api`
 
@@ -126,10 +128,11 @@ With Mau, you can deploy your application in just a few clicks, allowing you to 
 ### Endpoints principales:
 
 1. **Registro de usuario:**
+
    ```
    POST /auth/register
    Content-Type: application/json
-   
+
    {
      "email": "test@example.com",
      "password": "password123",
@@ -138,10 +141,11 @@ With Mau, you can deploy your application in just a few clicks, allowing you to 
    ```
 
 2. **Login:**
+
    ```
    POST /auth/login
    Content-Type: application/json
-   
+
    {
      "email": "test@example.com",
      "password": "password123"
@@ -155,6 +159,7 @@ With Mau, you can deploy your application in just a few clicks, allowing you to 
    ```
 
 ### Configurar Postman:
+
 1. Crea una nueva colección
 2. Agrega la variable `{{baseUrl}}` con el valor de tu Railway URL
 3. Usa el token JWT obtenido del login en el header Authorization

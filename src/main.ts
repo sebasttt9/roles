@@ -20,6 +20,18 @@ async function bootstrap() {
 
     app.useGlobalPipes(new ValidationPipe());
 
+    // Add request logging middleware
+    app.use((req, res, next) => {
+      const timestamp = new Date().toISOString();
+      console.log(`🌐 [${timestamp}] ${req.method} ${req.url} - IP: ${req.ip || req.connection.remoteAddress}`);
+      
+      res.on('finish', () => {
+        console.log(`📤 [${timestamp}] ${req.method} ${req.url} - Status: ${res.statusCode}`);
+      });
+      
+      next();
+    });
+
     console.log('Setting up Swagger documentation...');
 
   const config = new DocumentBuilder()

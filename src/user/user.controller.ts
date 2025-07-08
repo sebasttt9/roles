@@ -10,12 +10,14 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class UserController {
     @Get('test')
     getTest() {
+        console.log('🧪 User test endpoint called!');
         return { message: 'User controller is working!', timestamp: new Date().toISOString() };
     }
 
     @UseGuards(JwtAuthGuard)
     @Get('me')
     getMe(@Request() req) {
+    console.log('👨‍💼 Get profile request for user:', req.user?.email || 'unknown');
     return req.user;
     }
 
@@ -23,6 +25,7 @@ export class UserController {
     @Roles('ADMIN')
     @Get('admin')
     adminOnly() {
+    console.log('⚡ Admin endpoint accessed!');
     return { message: 'Solo los ADMIN pueden ver esto' };
     }
 }
