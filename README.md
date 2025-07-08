@@ -21,11 +21,31 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Roles y Permisos API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+API de autenticación y autorización con NestJS, JWT y Roles usando Prisma como ORM.
 
-## Project setup
+## Características
+
+- 🔐 Autenticación con JWT
+- 👥 Sistema de roles y permisos
+- 📊 Base de datos PostgreSQL con Prisma
+- 🧪 Tests unitarios y de integración
+- 📖 Documentación con Swagger
+- 🚀 Deploy en Railway
+
+## Tecnologías
+
+- NestJS
+- Prisma ORM
+- PostgreSQL
+- JWT
+- Swagger
+- Jest
+
+## Configuración del Proyecto
+
+### 1. Instalar dependencias
 
 ```bash
 $ npm install
@@ -69,6 +89,75 @@ $ mau deploy
 ```
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+
+## Deploy en Railway
+
+### Preparación para Railway
+
+1. **Conectar con GitHub:**
+   - Sube tu código a GitHub
+   - Asegúrate de que el `.env` esté en `.gitignore`
+
+2. **Configurar Railway:**
+   - Ve a [railway.app](https://railway.app)
+   - Conecta tu cuenta de GitHub
+   - Importa tu repositorio
+
+3. **Variables de entorno en Railway:**
+   ```
+   DATABASE_URL=your_postgresql_connection_string
+   JWT_SECRET=your_jwt_secret
+   PORT=3000
+   ```
+
+4. **Railway se encarga automáticamente de:**
+   - Instalar dependencias (`npm install`)
+   - Generar Prisma Client (`prisma generate`)
+   - Compilar la aplicación (`npm run build`)
+   - Ejecutar migraciones (`prisma migrate deploy`)
+   - Iniciar la aplicación (`npm run start:prod`)
+
+### URLs después del deploy:
+- **API:** `https://your-app.railway.app`
+- **Swagger:** `https://your-app.railway.app/api`
+
+## Testing con Postman
+
+### Endpoints principales:
+
+1. **Registro de usuario:**
+   ```
+   POST /auth/register
+   Content-Type: application/json
+   
+   {
+     "email": "test@example.com",
+     "password": "password123",
+     "name": "Test User"
+   }
+   ```
+
+2. **Login:**
+   ```
+   POST /auth/login
+   Content-Type: application/json
+   
+   {
+     "email": "test@example.com",
+     "password": "password123"
+   }
+   ```
+
+3. **Obtener usuarios (requiere autenticación):**
+   ```
+   GET /user
+   Authorization: Bearer your_jwt_token
+   ```
+
+### Configurar Postman:
+1. Crea una nueva colección
+2. Agrega la variable `{{baseUrl}}` con el valor de tu Railway URL
+3. Usa el token JWT obtenido del login en el header Authorization
 
 ## Resources
 
