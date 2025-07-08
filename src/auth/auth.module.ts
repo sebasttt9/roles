@@ -8,6 +8,8 @@ import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
 import { UserModule } from '../user/user.module';
 
+console.log('🔐 Loading AuthModule...');
+
 @Module({
   imports: [
     PassportModule,
@@ -25,4 +27,9 @@ import { UserModule } from '../user/user.module';
   providers: [AuthService, JwtStrategy],
   exports: [AuthService], // opcional, pero útil si otros módulos lo usan
 })
-export class AuthModule {}
+export class AuthModule {
+  constructor() {
+    console.log('✅ AuthModule initialized with AuthController');
+    console.log('🛣️  Auth routes: POST /auth/register, POST /auth/login, GET /auth/test');
+  }
+}

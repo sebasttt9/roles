@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 
+console.log('🔧 Loading AppModule...');
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,4 +20,9 @@ import { UserModule } from './user/user.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    console.log('✅ AppModule initialized successfully');
+    console.log('📦 Loaded modules: ConfigModule, AuthModule, PrismaModule, UserModule');
+  }
+}
