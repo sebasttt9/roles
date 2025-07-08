@@ -33,30 +33,14 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const port = process.env.PORT || 3000;
-  const host = '0.0.0.0'; // Always bind to all interfaces for Railway
-  const env = process.env.RAILWAY_ENVIRONMENT || process.env.NODE_ENV || 'development';
   
-  await app.listen(port, host);
-  console.log(`Application is running on: http://${host}:${port}`);
-  console.log('Available routes: /, /auth/register, /auth/login, /user/me, /user/admin');
-  console.log('Environment:', env);
-  console.log('Railway Environment:', process.env.RAILWAY_ENVIRONMENT || 'not set');
-
-  // Graceful shutdown handling
-  process.on('SIGTERM', async () => {
-    console.log('SIGTERM received, shutting down gracefully');
-    await app.close();
-    process.exit(0);
-  });
-
-  process.on('SIGINT', async () => {
-    console.log('SIGINT received, shutting down gracefully');
-    await app.close();
-    process.exit(0);
-  });
+  await app.listen(port, '0.0.0.0');
+  console.log(`🚀 Application running on http://0.0.0.0:${port}`);
+  console.log('📍 Available routes: /, /auth/register, /auth/login, /user/me, /user/admin');
+  console.log('🌍 Environment:', process.env.RAILWAY_ENVIRONMENT || 'local');
   
   } catch (error) {
-    console.error('Error starting application:', error);
+    console.error('❌ Error starting application:', error);
     process.exit(1);
   }
 }
