@@ -7,10 +7,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  console.log('Starting application bootstrap...');
+  console.log('🚀 Starting application bootstrap...');
   
   try {
-    const app = await NestFactory.create(AppModule);
+    console.log('📦 Creating NestJS application...');
+    const app = await NestFactory.create(AppModule, {
+      logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+    });
+
+    console.log('✅ NestJS application created successfully');
 
     // Enable CORS for Railway deployment
     app.enableCors({
@@ -18,7 +23,11 @@ async function bootstrap() {
       credentials: true,
     });
 
+    console.log('🌐 CORS enabled');
+
     app.useGlobalPipes(new ValidationPipe());
+
+    console.log('🔧 Global pipes configured');
 
     // Add request logging middleware
     app.use((req, res, next) => {
@@ -44,11 +53,27 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  console.log('📖 Swagger documentation configured');
+
   const port = process.env.PORT || 3000;
   
   await app.listen(port, '0.0.0.0');
-  console.log(`🚀 Application running on http://0.0.0.0:${port}`);
-  console.log('📍 Available routes: /, /auth/register, /auth/login, /user/me, /user/admin');
+  
+  // Get all registered routes
+  const server = app.getHttpServer();
+  const router = server._events.request.router;
+  
+  console.log('🚀 Application running on http://0.0.0.0:' + port);
+  console.log('📍 Registered routes:');
+  
+  // Try to log available routes
+  try {
+    const routes = app.get('RoutesResolver');
+    console.log('📋 Routes found:', routes);
+  } catch (e) {
+    console.log('❌ Could not get routes:', e.message);
+  }
+  
   console.log('🌍 Environment:', process.env.RAILWAY_ENVIRONMENT || 'local');
   
   } catch (error) {
