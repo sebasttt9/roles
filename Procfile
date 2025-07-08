@@ -1,1 +1,1 @@
-web: prisma migrate deploy && node dist/src/main.js
+web: node dist/src/main.js

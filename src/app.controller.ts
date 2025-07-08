@@ -152,4 +152,18 @@ export class AppController {
       url: req.url
     };
   }
+
+  @Get('version')
+  getVersion() {
+    console.log('📋 Version endpoint called!');
+    return {
+      version: '1.0.0',
+      timestamp: new Date().toISOString(),
+      buildTime: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development',
+      port: process.env.PORT || 3000,
+      nodeVersion: process.version,
+      message: 'Version endpoint working - this confirms the latest deployment'
+    };
+  }
 }

@@ -4,9 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "prisma migrate deploy && node dist/src/main.js",
-    "restartPolicyType": "NEVER",
-    "healthcheckPath": "/health",
-    "healthcheckTimeout": 30
+    "startCommand": "node dist/src/main.js",
+    "restartPolicyType": "NEVER"
   }
 }
